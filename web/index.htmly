@@ -1,0 +1,608 @@
+cat > web/index.html <<'EOF'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="SHADOW HUNTER WhatsApp Bot Pairing"
+    >
+
+    <title>SHADOW HUNTER — Pair Device</title>
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+</head>
+
+<body>
+
+    <!-- =====================================
+         BACKGROUND
+    ====================================== -->
+
+    <div class="background-glow"></div>
+    <div class="particles"></div>
+
+
+    <!-- =====================================
+         NAVIGATION
+    ====================================== -->
+
+    <header class="navbar">
+
+        <div class="brand">
+
+            <div class="brand-logo">
+                SH
+            </div>
+
+            <div class="brand-text">
+                <span>SHADOW</span>
+                <strong>HUNTER</strong>
+            </div>
+
+        </div>
+
+
+        <nav class="nav-links">
+
+            <a
+                href="#home"
+                class="active"
+            >
+                HOME
+            </a>
+
+            <a href="#pair">
+                PAIR DEVICE
+            </a>
+
+            <a href="#features">
+                FEATURES
+            </a>
+
+            <a href="#commands">
+                COMMANDS
+            </a>
+
+            <a href="#status">
+                STATUS
+            </a>
+
+        </nav>
+
+
+        <button class="panel-button">
+            👑 SHADOW PANEL
+        </button>
+
+    </header>
+
+
+
+    <!-- =====================================
+         HERO
+    ====================================== -->
+
+    <main id="home">
+
+        <section class="hero">
+
+            <div class="hero-content">
+
+                <div class="eyebrow">
+                    ⚔️ SHADOW HUNTER BOT SYSTEM
+                </div>
+
+                <h1>
+                    PAIR YOUR
+                    <span>DEVICE</span>
+                </h1>
+
+                <p>
+                    Connect your WhatsApp account to
+                    <strong>SHADOW HUNTER</strong>
+                    securely and easily.
+                </p>
+
+                <div class="hero-line"></div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             PAIRING SECTION
+        ====================================== -->
+
+        <section
+            id="pair"
+            class="pair-section"
+        >
+
+            <!-- LEFT SIDE -->
+
+            <div class="pair-card">
+
+                <div class="card-heading">
+
+                    <div class="heading-icon">
+                        🔗
+                    </div>
+
+                    <div>
+                        <h2>
+                            PAIR
+                            <span>SHADOW HUNTER</span>
+                        </h2>
+
+                        <p>
+                            Enter your WhatsApp number
+                            to receive a pairing code.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <form id="pairForm">
+
+                    <label for="phone">
+                        WhatsApp Number
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">
+                            ☎
+                        </span>
+
+                        <input
+                            type="tel"
+                            id="phone"
+                            name="phone"
+                            placeholder="e.g. 256700123456"
+                            autocomplete="tel"
+                            required
+                        >
+
+                    </div>
+
+                    <div class="input-hint">
+                        • Enter country code without +
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        id="pairButton"
+                        class="pair-button"
+                    >
+                        <span>🔐</span>
+                        GET PAIRING CODE
+                    </button>
+
+                </form>
+
+
+                <div class="divider">
+                    <span>OR</span>
+                </div>
+
+
+                <div class="info-box">
+
+                    <div class="info-icon">
+                        🛡️
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            WHAT IS PAIRING CODE?
+                        </h3>
+
+                        <p>
+                            A pairing code allows you
+                            to connect your WhatsApp
+                            account to SHADOW HUNTER
+                            without scanning a QR code.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- CENTER -->
+
+            <div class="code-card">
+
+                <div class="code-heading">
+                    🔧
+                    <span>PAIRING CODE</span>
+                </div>
+
+                <p class="code-subtitle">
+                    Your code will appear here
+                </p>
+
+
+                <div
+                    id="pairingCode"
+                    class="pairing-code"
+                >
+                    <span>—</span>
+                    <span>—</span>
+                    <span>—</span>
+                    <span>—</span>
+                    <span>—</span>
+                    <span>—</span>
+                    <span>—</span>
+                    <span>—</span>
+                </div>
+
+
+                <div class="expiry">
+                    ⏱ Code expires in:
+                    <strong id="timer">
+                        02:00
+                    </strong>
+                </div>
+
+
+                <div
+                    id="connectionStatus"
+                    class="connection-status"
+                >
+
+                    <div class="status-title">
+                        STATUS
+                    </div>
+
+                    <div class="status-value">
+                        <span class="status-dot"></span>
+                        NOT CONNECTED
+                    </div>
+
+                    <p>
+                        Enter your WhatsApp number
+                        to request a pairing code.
+                    </p>
+
+                </div>
+
+
+                <button
+                    id="refreshButton"
+                    class="refresh-button"
+                    type="button"
+                >
+                    ↻ REFRESH CODE
+                </button>
+
+            </div>
+
+
+
+            <!-- RIGHT SIDE -->
+
+            <div class="instructions-card">
+
+                <div class="instructions-title">
+                    📖
+                    <span>HOW TO PAIR</span>
+                </div>
+
+
+                <div class="steps">
+
+                    <div class="step">
+
+                        <div class="step-number">
+                            1
+                        </div>
+
+                        <div>
+                            <h3>
+                                Enter WhatsApp Number
+                            </h3>
+
+                            <p>
+                                Enter the WhatsApp
+                                number you want to
+                                connect.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="step">
+
+                        <div class="step-number">
+                            2
+                        </div>
+
+                        <div>
+                            <h3>
+                                Get Pairing Code
+                            </h3>
+
+                            <p>
+                                Click the button to
+                                request your unique
+                                pairing code.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="step">
+
+                        <div class="step-number">
+                            3
+                        </div>
+
+                        <div>
+                            <h3>
+                                Open WhatsApp
+                            </h3>
+
+                            <p>
+                                Open WhatsApp and go
+                                to linked devices.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="step">
+
+                        <div class="step-number">
+                            4
+                        </div>
+
+                        <div>
+                            <h3>
+                                Enter Pairing Code
+                            </h3>
+
+                            <p>
+                                Enter the code shown
+                                on this website.
+                            </p>
+                        </div>
+
+                    </div>
+
+
+                    <div class="step">
+
+                        <div class="step-number">
+                            5
+                        </div>
+
+                        <div>
+                            <h3>
+                                Connected!
+                            </h3>
+
+                            <p>
+                                Your WhatsApp will be
+                                connected to SHADOW HUNTER.
+                            </p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="secure-box">
+
+                    <span>
+                        🔒
+                    </span>
+
+                    <div>
+                        <strong>
+                            SECURE CONNECTION
+                        </strong>
+
+                        <small>
+                            Your connection is protected.
+                        </small>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             STATUS
+        ====================================== -->
+
+        <section
+            id="status"
+            class="status-section"
+        >
+
+            <div class="status-box">
+
+                <div class="status-icon">
+                    ◉
+                </div>
+
+                <div>
+                    <small>
+                        BOT STATUS
+                    </small>
+
+                    <strong class="online">
+                        ● ONLINE
+                    </strong>
+                </div>
+
+            </div>
+
+
+            <div class="status-box">
+
+                <div class="status-icon">
+                    👥
+                </div>
+
+                <div>
+                    <small>
+                        USERS CONNECTED
+                    </small>
+
+                    <strong>
+                        0
+                    </strong>
+                </div>
+
+            </div>
+
+
+            <div class="status-box">
+
+                <div class="status-icon">
+                    ◷
+                </div>
+
+                <div>
+                    <small>
+                        UPTIME
+                    </small>
+
+                    <strong>
+                        ONLINE
+                    </strong>
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             FEATURES
+        ====================================== -->
+
+        <section
+            id="features"
+            class="features-section"
+        >
+
+            <div class="section-title">
+
+                <span>
+                    WHY SHADOW HUNTER
+                </span>
+
+                <h2>
+                    POWERFUL. FAST. <strong>SECURE.</strong>
+                </h2>
+
+            </div>
+
+
+            <div class="feature-grid">
+
+                <div class="feature-card">
+                    <div>⚡</div>
+                    <h3>FAST</h3>
+                    <p>
+                        Fast WhatsApp bot
+                        connection and commands.
+                    </p>
+                </div>
+
+
+                <div class="feature-card">
+                    <div>🛡️</div>
+                    <h3>SECURE</h3>
+                    <p>
+                        Built with security and
+                        group protection in mind.
+                    </p>
+                </div>
+
+
+                <div class="feature-card">
+                    <div>🤖</div>
+                    <h3>POWERFUL</h3>
+                    <p>
+                        Downloader, group tools,
+                        security and utility commands.
+                    </p>
+                </div>
+
+
+                <div class="feature-card">
+                    <div>🔗</div>
+                    <h3>EASY PAIRING</h3>
+                    <p>
+                        Connect your WhatsApp using
+                        a simple pairing code.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- =====================================
+             FOOTER
+        ====================================== -->
+
+        <footer>
+
+            <div class="footer-brand">
+                ⚔️ SHADOW <strong>HUNTER</strong>
+            </div>
+
+            <p>
+                © 2026 SHADOW HUNTER BOT.
+                All Rights Reserved.
+            </p>
+
+            <p>
+                Built with ❤️ by
+                <strong>JAVA NATION</strong>
+            </p>
+
+        </footer>
+
+    </main>
+
+
+    <script src="app.js"></script>
+
+</body>
+</html>
+EOF
