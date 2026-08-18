@@ -1,0 +1,209 @@
+cat > web/app.js <<'EOF'
+const pairForm =
+    document.getElementById("pairForm");
+
+const pairButton =
+    document.getElementById("pairButton");
+
+const refreshButton =
+    document.getElementById("refreshButton");
+
+const phoneInput =
+    document.getElementById("phone");
+
+const pairingCode =
+    document.getElementById("pairingCode");
+
+const connectionStatus =
+    document.getElementById(
+        "connectionStatus"
+    );
+
+const timer =
+    document.getElementById("timer");
+
+
+let seconds = 120;
+
+
+/* =========================================
+   FORM
+========================================= */
+
+pairForm.addEventListener(
+    "submit",
+    function (event) {
+
+        event.preventDefault();
+
+        const phone =
+            phoneInput.value
+                .replace(/\D/g, "");
+
+        if (!phone) {
+            alert(
+                "Please enter your WhatsApp number."
+            );
+
+            return;
+        }
+
+        pairButton.disabled = true;
+
+        pairButton.innerHTML =
+            "⏳ REQUESTING CODE...";
+
+
+        /*
+         * FRONTEND ONLY
+         *
+         * Later this will call our
+         * SHADOW HUNTER pairing API.
+         */
+
+        connectionStatus.innerHTML = `
+            <div class="status-title">
+                STATUS
+            </div>
+
+            <div class="status-value">
+                <span class="status-dot"></span>
+                WAITING FOR SERVER
+            </div>
+
+            <p>
+                The website is ready.
+                The WhatsApp pairing API
+                will be connected in the next step.
+            </p>
+        `;
+
+
+        setTimeout(() => {
+
+            pairButton.disabled = false;
+
+            pairButton.innerHTML =
+                "🔐 GET PAIRING CODE";
+
+        }, 1500);
+
+    }
+);
+
+
+/* =========================================
+   REFRESH
+========================================= */
+
+refreshButton.addEventListener(
+    "click",
+    function () {
+
+        pairingCode.innerHTML = `
+            <span>—</span>
+            <span>—</span>
+            <span>—</span>
+            <span>—</span>
+            <span>—</span>
+            <span>—</span>
+            <span>—</span>
+            <span>—</span>
+        `;
+
+        connectionStatus.innerHTML = `
+            <div class="status-title">
+                STATUS
+            </div>
+
+            <div class="status-value">
+                <span class="status-dot"></span>
+                NOT CONNECTED
+            </div>
+
+            <p>
+                Enter your WhatsApp number
+                to request a pairing code.
+            </p>
+        `;
+
+        seconds = 120;
+
+        updateTimer();
+
+    }
+);
+
+
+/* =========================================
+   TIMER
+========================================= */
+
+function updateTimer() {
+
+    const minutes =
+        Math.floor(seconds / 60);
+
+    const remainingSeconds =
+        seconds % 60;
+
+    timer.textContent =
+        `${String(minutes).padStart(2, "0")}:` +
+        `${String(remainingSeconds).padStart(2, "0")}`;
+
+}
+
+
+setInterval(() => {
+
+    if (seconds > 0) {
+
+        seconds--;
+
+        updateTimer();
+
+    }
+
+}, 1000);
+
+
+/* =========================================
+   NAVIGATION
+========================================= */
+
+document
+    .querySelectorAll(".nav-links a")
+    .forEach(link => {
+
+        link.addEventListener(
+            "click",
+            function () {
+
+                document
+                    .querySelectorAll(
+                        ".nav-links a"
+                    )
+                    .forEach(item =>
+                        item.classList.remove(
+                            "active"
+                        )
+                    );
+
+                this.classList.add("active");
+
+            }
+        );
+
+    });
+
+
+/* =========================================
+   INITIALIZE
+========================================= */
+
+updateTimer();
+
+console.log(
+    "⚔️ SHADOW HUNTER WEBSITE LOADED"
+);
+EOF
